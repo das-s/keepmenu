@@ -32,7 +32,12 @@ try:
     # secrets only available python 3.6+
     from secrets import choice
 except ImportError:
-    from random import choice
+    def choice(seq):
+        """Provide `choice` function call for pw generation
+
+        """
+        return random.SystemRandom().choice(seq)
+
 
 AUTH_FILE = expanduser("~/.cache/.keepmenu-auth")
 CONF_FILE = expanduser("~/.config/keepmenu/config.ini")
@@ -269,9 +274,11 @@ def get_password_chars():
         for key, val in pw_chars.items():
             presets[key.title()] = {k: chars[k] for k in (key,)}
     if CONF.has_section('password_char_presets'):
+        if CONF.options('password_char_presets'):
+            presets = {}
         for name, val in CONF.items('password_char_presets'):
             try:
-                presets[name.title()] = {k: chars[k] for k in val.split()}
+                presets[name.title()] = {k: chars[k] for k in shlex.split(val)}
             except KeyError:
                 print("Error: Unknown value in preset {}. Ignoring.".format(name))
                 continue

@@ -49,7 +49,8 @@ License
 Requirements
 ------------
 
-1. Python 3.4+
+1. Python 3.4+. *Note* Python 3.6+ uses the `secrets` module for password
+   generation to improve security.
 2. Pykeepass_ and PyUserInput_. Install via pip or your distribution's package
    manager, if available.
 3. Dmenu. Basic support is included for Rofi_, but most Rofi
@@ -114,7 +115,8 @@ Installation
 - New preset groups of character sets can be defined in config.ini in the
   `[password_char_presets]` section. You can set any combination of default and
   custom character sets. A minimum of one character from each distinct set will
-  be used.
+  be used when generating a new password. If any custom presets are defined, the
+  default presets will not be displayed unless they are uncommented.
 
 .. Warning:: If you choose to store your database password into config.ini, make
    sure to `chmod 600 config.ini`. This is not secure and I only added it as a

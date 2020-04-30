@@ -60,7 +60,8 @@ Copyright © 2020 Scott Hansen <firecat4153@gmail.com>.  Keepmenu is released un
 
 
 .SH REQUIREMENTS
-\fB1.\fR Python 3.4+
+\fB1.\fR Python 3.4+. *Note* Python 3.6+ uses the \fIsecrets\fP module for password
+generation to improve security.
 
 \fB2.\fR \fI\%Pykeepass\fP and \fI\%PyUserInput\fP\&. Install via pip or your
 distribution\(aqs package manager, if available.
@@ -136,7 +137,8 @@ punctuation), it will replace the default values.
 New preset groups of character sets can be defined in config.ini in the
 \fI[password_char_presets]\fP section. You can set any combination of default
 and custom character sets. A minimum of one character from each distinct set
-will be used.
+will be used when generating a new password. If any custom presets are defined,
+the default presets will not be displayed unless they are uncommented.
 
 .RE
 
