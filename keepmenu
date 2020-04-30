@@ -1143,7 +1143,10 @@ def edit_entry(kpo, kp_entry):  # pylint: disable=too-many-return-statements, to
                 length = int(length)
             except ValueError:
                 length = 20
-            sel = gen_passwd(get_password_chars(), length)
+            chars = get_password_chars()
+            if chars is False:
+                return True
+            sel = gen_passwd(chars, length)
             if sel is False:
                 dmenu_err("Number of char groups desired is more than requested pw length")
                 return True
